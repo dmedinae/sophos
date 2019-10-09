@@ -1,0 +1,47 @@
+<div style="margin: 1rem; width: 85vw;">
+  <div style="margin-bottom: 1rem;">
+    <mat-form-field appearance="outline" class="search">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event.target.value)">
+      <mat-icon matSuffix style="color:grey;">search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="my-table mat-elevation-z8" style="margin-bottom: 15px">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+        <ng-container [ngSwitch]="column">
+
+          <ng-container *ngSwitchCase="'detail'">
+            <mat-header-cell *matHeaderCellDef> Detalle </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-raised-button (click)="buttonClick(element)" mat-raised-button>
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'fechaNacimiento'">
+            <mat-header-cell *matHeaderCellDef>{{displayedColumnsNames[column]}}</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element[column] | date:"dd/MM/yyyy" }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{displayedColumnsNames[column]}}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element[column]}}</mat-cell>
+          </ng-container>
+
+        </ng-container>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

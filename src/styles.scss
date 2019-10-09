@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  padding-top: 65px;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.dialog-image .mat-dialog-container {
+  min-width: 40vw !important;
+  padding: 2rem !important;
+}
+
+.dialog-loading .mat-dialog-container {
+  box-shadow: none;
+  cursor: wait;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.dialog-form .mat-dialog-container {
+  min-width: 80vw !important;
+  padding: 2rem !important;
+}

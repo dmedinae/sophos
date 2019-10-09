@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header>
+    <div class="row" style="width: 100%;">
+      <div class="col">
+        <mat-card-title>{{title}}</mat-card-title>
+      </div>
+      <div class="col text-right">
+        <ng-container *ngFor="let chart of chartType">
+          <button (click)="changeType(chart['value'])" mat-raised-button style="margin: 5px;">
+            <mat-icon>{{chart['icon']}}</mat-icon>
+          </button>
+        </ng-container>
+
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <div id="chartdiv" [style.width.%]="100" [style.height.px]="500"></div>
+  </mat-card-content>
+
+</mat-card>

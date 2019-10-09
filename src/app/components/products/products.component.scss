@@ -1,0 +1,12 @@
+:host .mat-form-field {
+    max-width: 100%;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    
+    padding-bottom: 0px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper  {
+    margin: 0;
+}

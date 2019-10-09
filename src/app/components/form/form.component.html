@@ -1,0 +1,117 @@
+<div class=" dialog-title">
+  <div style="justify-content: space-between; display: flex;">
+    <h3 style="padding: 1rem; margin: 0rem;">Datos pedido</h3>
+
+    <div style="display: flex; justify-content: flex-end;">
+      <button
+        mat-icon-button
+        type="button"
+        (click)="close()"
+        class="button-icon"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div style="display: block; max-height: 60vh;">
+  <div class="dialog-content">
+    <div class="row">
+      <form
+        [formGroup]="orderForm"
+        class="col text-center"
+        (keyup.enter)="orderForm.valid ? login() : ''"
+      >
+        <mat-form-field
+          style="width: 100%; margin-bottom: 0.2rem;"
+          appearance="outline"
+        >
+          <mat-label>Nombre</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Nombre"
+            formControlName="nombre"
+          />
+        </mat-form-field>
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%; margin-bottom: 0.2rem;"
+        >
+          <mat-label>Fecha nacimiento</mat-label>
+          <input
+            matInput
+            readonly
+            [max]="maxDate"
+            (click)="picker.open()"
+            [matDatepicker]="picker"
+            formControlName="fechaNacimiento"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            startView="multi-year"
+            touchUi
+            #picker
+          ></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field
+          style="width: 100%; margin-bottom: 0.2rem;"
+          appearance="outline"
+        >
+          <mat-label>Dirección envío</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Dirección envío"
+            formControlName="direccionEnvio"
+          />
+        </mat-form-field>
+        <mat-form-field
+          style="width: 100%; margin-bottom: 0.2rem;"
+          appearance="outline"
+        >
+          <mat-label>Ciudad</mat-label>
+          <mat-select formControlName="ciudad">
+            <mat-option *ngFor="let city of cities" [value]="city['municipio']">
+              {{ city["municipio"] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="row">
+          <div class="col text-center">
+            <button mat-raised-button (click)="fileInputTwo.click()">
+              <mat-icon>library_add</mat-icon>
+              <span>Copia cédula <strong>*</strong></span>
+              <input
+                #fileInputTwo
+                type="file"
+                (change)="onFileInput($event)"
+                style="display:none;"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span style="margin-left:5px; color: grey;">Archivo cargado: {{
+              filesMessage
+            }}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="dialog-button" style="padding: 0.1rem 0rem 0.8rem;">
+  <div class="col text-center">
+    <button [disabled]="!orderForm.valid" mat-raised-button class="btn-action" (click)="save()">
+      <mat-icon>save</mat-icon>
+      <span>Guardar</span>
+    </button>
+  </div>
+</div>

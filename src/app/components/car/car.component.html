@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div>
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Productos</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <ng-container *ngIf="order.length; else message">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">&nbsp;</th>
+                      <th scope="col">Producto</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Valor</th>
+                      <th scope="col">Valor total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of order">
+                      <td class="align-middle">
+                        <img
+                          (click)="openImage(product)"
+                          [src]="product['miniatura']"
+                          alt="Photo of a Shiba Inu"
+                        />
+                      </td>
+                      <td class="align-middle">{{ product["descripcion"] }}</td>
+                      <td class="align-middle">{{ product["cantidadSolicitada"] }}</td>
+                      <td class="align-middle">{{ product["precio"] | currency }}</td>
+                      <td class="align-middle">
+                        {{
+                          product["cantidadSolicitada"] * product["precio"]
+                            | currency
+                        }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </ng-container>
+            <ng-template #message>
+              <div class="row">
+                <div class="col text-center">
+                  <i class="material-icons">shopping_cart</i>
+                  <h4>No hay productos en el pedido.</h4>
+                </div>
+              </div>
+            </ng-template>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="col text-center">
+              <ng-container *ngIf="order.length; else buttonProducts">
+                <button mat-raised-button mat-button (click)="makeOrder()">Hacer pedido</button>
+              </ng-container>
+              <ng-template #buttonProducts>
+                <button mat-raised-button mat-button routerLink="../products">
+                  Ir a productos
+                </button>
+              </ng-template>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

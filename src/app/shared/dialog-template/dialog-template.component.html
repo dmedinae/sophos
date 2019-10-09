@@ -1,0 +1,33 @@
+<div class=" dialog-title">
+  <div style="justify-content: space-between; display: flex;">
+    <h1 style="padding: 1rem; margin: 0rem;">Title Dialog</h1>
+
+    <div style="display: flex; justify-content: flex-end;">
+      <button
+        mat-icon-button
+        type="button"
+        (click)="close()"
+        class="button-icon"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div style="display: block; max-height: 60vh; overflow: auto;">
+  <div class="dialog-content">
+    <!-- Poner acá el contenido del dialogo -->
+    Contenido del dialogo
+    <div>
+      Esto es un ejemplo
+    </div>
+  </div>
+</div>
+
+<div class="dialog-button" style="padding: 0.1rem 0rem 0.8rem;">
+  <button mat-raised-button class="btn-action" (click)="save()">
+    <mat-icon>save</mat-icon>
+    <span>Guardar</span>
+  </button>
+</div>

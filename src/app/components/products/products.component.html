@@ -1,0 +1,64 @@
+<div class="container-fluid">
+  <div class="row">
+    <ng-container *ngFor="let product of products">
+      <div class="col-lg-3" style="padding-bottom: 15px;">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ product["descripcion"] }}</mat-card-title>
+            <mat-card-subtitle>{{ product["categoria"] }}</mat-card-subtitle>
+          </mat-card-header>
+          <div class="row">
+            <div class="col text-center">
+              <img
+                (click)="openImage(product)"
+                [src]="product['miniatura']"
+                alt="Photo of a Shiba Inu"
+              />
+            </div>
+          </div>
+
+          <mat-card-content>
+            <div class="row">
+              <div class="col">
+                Precio:
+              </div>
+              <div class="col">
+                {{ product["precio"] | currency }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                Disponibles:
+              </div>
+              <div class="col">
+                {{ product["cantidadDisponible"] }}
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Cantidad</mat-label>
+                  <input
+                    min="0"
+                    [max]="product['cantidadDisponible']"
+                    [value]="product['cantidadSolicitada']"
+                    type="number"
+                    (input)="checkQuantity($event.target.value, product)"
+                    matInput
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-6 text-center" style="margin: auto;">
+                <button mat-raised-button mat-button (click)="add(product)">
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+</div>

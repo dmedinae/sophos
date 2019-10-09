@@ -1,0 +1,87 @@
+<div class=" dialog-title">
+  <div style="justify-content: space-between; display: flex;">
+    <h3 style="padding: 1rem; margin: 0rem;">Pedido {{ order["idPedido"] }}</h3>
+    <div style="display: flex; justify-content: flex-end;">
+      <button
+        mat-icon-button
+        type="button"
+        (click)="close()"
+        class="button-icon"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div style="display: block; max-height: 60vh; overflow: auto;">
+  <div class="dialog-content">
+    <!-- Poner acá el contenido del dialogo -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Nombre</strong>: {{ order["nombre"] }}
+        </div>
+        <div class="col-md-6">
+          <strong>Fecha nacimiento</strong>: {{ order["fechaNacimiento"]  | date:"dd/MM/yyyy" }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Dirección envío</strong>: {{ order["direccionEnvio"] }}
+        </div>
+        <div class="col-md-6">
+          <strong>Ciudad</strong>: {{ order["ciudad"] }}
+        </div>
+      </div>
+      <div class="row">
+          <div style="padding: 2%;" class="col text-center">
+            <button  mat-raised-button (click)="download()">Descargar cédula</button>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ng-container *ngIf="order['productos']">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Valor total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of order['productos']">
+                    <td class="align-middle">
+                      <img
+                        (click)="openImage(product)"
+                        [src]="product['miniatura']"
+                        alt="Photo of a Shiba Inu"
+                      />
+                    </td>
+                    <td class="align-middle">{{ product["descripcion"] }}</td>
+                    <td class="align-middle">
+                      {{ product["cantidadSolicitada"] }}
+                    </td>
+                    <td class="align-middle">
+                      {{ product["precio"] | currency }}
+                    </td>
+                    <td class="align-middle">
+                      {{
+                        product["cantidadSolicitada"] * product["precio"]
+                          | currency
+                      }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

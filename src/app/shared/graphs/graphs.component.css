@@ -1,0 +1,4 @@
+::ng-deep .amcharts-legend-div {
+    overflow-y: auto!important;
+    max-height: 400px;
+}
